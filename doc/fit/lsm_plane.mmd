@@ -1,0 +1,68 @@
+# Least Squares Method (LSM)
+## Direct Method - Plane
+
+Have $N$ points: $(x_1,y_1,z_1),\ldots,(x_N,y_N,z_N)$
+
+Find $f(x,y;a,b,c)=ax+by+c$ which minimizes
+
+$$
+\sum_{k=1}^N{\left|f(x_k)-z_k\right|}
+$$
+
+Consider merit function
+
+$$
+\chi^2(a,b,c) = 
+\sum_{k=1}^N \left( f(x_k)-z_k \right)^2 = 
+\sum_{k=1}^N \left( a x_k + b y_k + c - z_k \right)^2
+$$
+
+Take partial derivatives:
+
+\begin{eqnarray}
+\frac{\partial(\chi^2)}{\partial a} &=& 2 \sum_{k=1}^N (a x_k + b y_k + c - z_k )x_k \\
+\frac{\partial(\chi^2)}{\partial b} &=& 2 \sum_{k=1}^N (a x_k + b y_k + c - z_k )y_k \\
+\frac{\partial(\chi^2)}{\partial c} &=& 2 \sum_{k=1}^N (a x_k + b y_k + c - z_k ) \\
+\end{eqnarray}
+
+The merit function reaches minimum when derivatives vanish. This leads to the following set of equations
+\begin{eqnarray}
+a S_{xx} + b S_{xy} + c S_x &=& S_{xz} \\
+a S_{xy} + b S_{yy} + c S_y &=& S_{yz} \\
+a S_x + b S_y + c N &=& S_z
+\end{eqnarray}
+
+or in matrix form
+
+$$
+\begin{pmatrix}
+  S_{xx} & S_{xy} & S_x \\
+  S_{xy} & S_{yy} & S_y \\
+  S_x & S_y & N \\
+\end{pmatrix}
+\begin{pmatrix}
+a \\ b \\ c
+\end{pmatrix}
+=
+\begin{pmatrix}
+S_{xz} \\ S_{yz} \\ S_z
+\end{pmatrix}
+$$
+
+Where $S_x = \sum_{k=1}^N x_k$, $S_y = \sum_{k=1}^N y_k$, $S_y = \sum_{k=1}^N z_k$, $S_{xx} = \sum_{k=1}^N x_k^2$, $S_{xy} = \sum_{k=1}^N x_k y_k$
+
+Solving gives the following closed form solution
+
+\begin{eqnarray}
+a &=& \frac{S_{xz} S_y^2 - N S_{xz} S_{yy} + N S_{xy} S_{yz} - S_x S_y S_{yz} - S_{xy} S_y S_z + S_x S_{yy} S_z}{d} \\
+b &=& \frac{N S_{xy} S_{xz} - S_{x} S_{xz} S_y + S_x^2 S_{yz} - N S_{xx} S_{yz} - S_x S_{xy} S_z + S_{xx} S_y S_z}{d} \\
+c &=& \frac{S_x S_{xz} S_{yy} + S_{xx} S_y S_{yz} - S_{xy} (S_{xz} S_y + S_x S_{yz}) + S_{xy}^2 S_z -
+ S_{xx} S_{yy} S_z }{d}
+\end{eqnarray}
+
+where 
+
+\begin{equation}
+d = N (S_{xy}^2 - S_{xx} S_{yy}) -2 S_x S_{xy} S_y + S_{xx} S_y^2 + S_x^2 S_{yy}
+\end{equation}
+

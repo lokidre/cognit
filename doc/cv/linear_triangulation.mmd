@@ -1,0 +1,25 @@
+# Linear Triangulation
+
+We have measurements $\mathbf{m}_1=\mathbf{P}_1\mathbf{M}$ and $\mathbf{m}_2=\mathbf{P}_2\mathbf{M}$
+where $\mathbf{M}=(x,y,z,1)^T$
+
+Combine equation into $\mathbf{A}\mathbf{M}=\mathbf{0}$ 
+
+$$
+A = 
+\left(
+\begin{array}{c}
+x_1\mathbf{p}_1^{3T}-\mathbf{p}_1^{1T}\\
+y_1\mathbf{p}_1^{3T}-\mathbf{p}_1^{2T}\\
+x_2\mathbf{p}_2^{3T}-\mathbf{p}_2^{1T}\\
+y_2\mathbf{p}_2^{3T}-\mathbf{p}_2^{2T}\\
+\end{array}
+\right)
+$$
+
+
+where $p_k^{iT}$ is i-th row of $\mathbf{P}_k$
+
+then the solution is the last column of $\mathbf{V}$ (corresponding to the smallest singular value) in SVD decomposition.
+
+

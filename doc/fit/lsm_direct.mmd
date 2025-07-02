@@ -1,0 +1,57 @@
+# Least Squares Method (LSM)
+
+## Direct Method - Straight Line
+
+Given $N$ points: $(x_1,y_1),\ldots,(x_N,y_N)$
+
+Find $f(x)=ax+b$ which minimizes
+
+\begin{equation}
+\sum_{k=1}^N{\left|f(x_k)-y_k\right|}
+\end{equation}
+
+Consider merit function
+
+\begin{equation}
+\chi^2(a,b) = \sum_{k=1}^N \left( f(x_k)-y_k \right)^2 = \sum_{k=1}^N \left( a x_k + b - y_k \right)^2
+\end{equation}
+
+Take partial derivatives:
+
+\begin{eqnarray}
+\frac{\partial(\chi^2)}{\partial a} &=& 2 \sum_{k=1}^N (a x_k + b - y_k )x_k \\
+\frac{\partial(\chi^2)}{\partial b} &=& 2 \sum_{k=1}^N (a x_k + b - y_k )
+\end{eqnarray}
+
+The merit function reaches minimum when derivatives vanish. This leads to the following set of equations:
+
+\begin{eqnarray}
+a S_{xx} + b S_x &=& S_{xy} \\
+a S_x + b N &=& S_y
+\end{eqnarray}
+
+
+or in matrix form
+
+$$
+\begin{pmatrix}
+  S_{xx} & S_x \\
+  S_x & N \\
+\end{pmatrix}
+\begin{pmatrix}
+  a \\ b
+\end{pmatrix}
+=
+\begin{pmatrix}
+  S_{xy} \\ S_y
+\end{pmatrix}
+$$
+
+Where $S_x = \sum_{k=1}^N x_k$, $S_y = \sum_{k=1}^N y_k$, $S_{xx} = \sum_{k=1}^N x_k^2$, $S_{xy} = \sum_{k=1}^N x_k y_k$
+
+Solving gives the following closed form solution
+
+\begin{eqnarray}
+a &=& \frac{N S_{xy} - S_x S_y }{N S_{xx} - S_x^2} \\
+b &=& \frac{S_x S_y - S_x S_{xy} }{N S_{xx} - S_x^2}
+\end{eqnarray}

@@ -1,0 +1,23 @@
+# Triangulation method for computer vision
+
+Let $m_1$ and $m_2$ be two corresponding points and $P_1$ and $P_2$ be camera matrices.
+
+The problem is finding $X$ satisfying $m_1=P_1X$ and $m_2=P_2X$
+
+$$m_1\times P_1X=0$$
+
+which leads to the following set of equations:
+
+
+Let $\tau$ be triangulation method used to compute 3D space point $M$ 
+
+$$
+M = \tau(m_1, m_2, P_1, P_2)
+$$
+
+Let $F$ be fundamental matrix. The two rays correspoinding to points $m_1$ and $m_2$ will meet in space iff the points satisfy:
+
+$$
+ m_2^T F m_1 = 0
+$$
+

@@ -1,0 +1,5 @@
+! looks like dGxy doesn't work correctly
+  . try to use dGx*dGy
+  . try to use Deriche recursive filters
+. add mirrored border to make convolution better
+

@@ -1,0 +1,44 @@
+# Camera Distortion
+
+Camera matrix
+
+\begin{pmatrix}
+  f_x & s & p_x \\
+  0 & f_y & p_y \\
+  0 & 0 & 1 \\
+\end{pmatrix}
+
+where
+   $f$ is the focus among $x$ and $y$ axes, 
+   $p$ is principal point, 
+   $s$ is skew coefficient, zero for square pixels
+
+Distortion vector is given as
+
+\begin{pmatrix}
+k_1 \\
+k_2 \\
+p_1 \\
+p_2 \\
+\end{pmatrix}
+
+where $k$ and $p$ are radial and tangential distortion coefficients.
+
+Distortion correction. Let
+$$
+r^2 = x^2 + y^2
+$$
+
+$$
+x' = (1 + k_1r^2 + k_2r^4)x
+$$
+
+\begin{eqnarray}
+xs = x + (k_1r^2+k_2r^4) + (2p_1xy+p_2(r^2+2x^2)) \\
+ys = y + (k_1r^2+k_2r^4) + (2p_2xy+p_2(r^2+2y^2))\\
+r^2 = x^2+y^2\\
+us = u + (u-cx)( k_1r^2+k_2r^4+2p_1y+p_2(r^2/x+2x))\\
+vs = v + (v-cy)( k_1r^2+k_2r^4+2p_2y+p_1(r^2/y+2y))
+\end{eqnarray}
+
+

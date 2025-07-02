@@ -1,0 +1,33 @@
+# Jacobi Method for Finding Eigen System of Symmetric Matrix
+
+Let $A$ be $NxN$ symmetric matrix
+
+The Jacobi rotation matrix has the following form
+
+$$
+J_{pq} = 
+\begin{pmatrix}
+1 &        &        &        &        &        &   &   &   \\
+  & \ddots &        &        &        &        &   &   &  \\
+  &        & c      & \cdots & \cdots & \cdots & s &   &   \\
+  &        & \vdots & \ddots &        &        & \vdots &  &  \\
+  &        & \vdots &        &    1   &        & \vdots &  &  \\
+  &        & \vdots &        &        & \ddots & \vdots &  &  \\
+  &        &  -s    & \cdots & \cdots & \cdots &  c     &  &  \\
+  &        &        &   &  &  &  & \ddots &  \\
+  &        &        &  &  &  &  &  & 1 \\
+\end{pmatrix}
+$$
+
+
+Where $s=\sin{\phi}$, $c=\cos{\phi}$, $\phi$ is some rotation angle
+All diagonal elements are 1 except $j_{pq}=i_{pq}=c$. All off-diagonal elements are 0 except $j_{pq}=-s$, $i_{pq}=s$
+
+The matrix $\mathbf{A'}$ is being transformed as 
+
+$$
+\mathbf{A'} = J_{pq}^T A J_{pq}
+$$
+
+After multiplication the matrix $A$ will have the form
+

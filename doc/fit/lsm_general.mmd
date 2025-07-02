@@ -1,0 +1,45 @@
+# General Linear Least Squares
+
+Suppose we have a set $D=\{(x_0,y_0),(x_{N-1},y_{N-1})\}$ of $M$ data points. The function $F$ is a linear combination of $M$ basis functions $\phi_j(x)$. 
+
+$$
+F(x) = \sum_{j=0}^{N-1}c_k\phi_j(x)
+$$
+
+Merit function the can be defined as
+
+$$
+\chi^2 = \sum_{i=0}^{N-1} \left( \frac{y_i - \sum_{j=0}^{M-1}c_j\phi_j(x)}{\sigma_i} \right)^2
+$$
+
+where $\sigma_i$ is stanard deviation of the ith data point. If it's unknown, then $\sigma$ can be set to 1.
+
+Build matrix $\mathbf{A}$ so that $a_{ij}=\phi_j(x_i)/\sigma$ and vector $\mathbf{b}=y_i/\sigma_i$
+
+The minimum of $\chi^2$ occures when the derivative with respect to all $c_k$ vanishes. Which yields to
+
+\begin{equation}
+\sum_{i=0}^{N-1}{\frac{1}{\sigma_j^2} \left( y_i - \sum_{j=0}^{M-1}{c_j\phi_j(x_i)} \right) \phi_k(x_i) } = 0
+\end{equation}
+
+where $k=0,,M-1$
+
+\begin{equation}
+\sum_{j=0}^{M-1}{\alpha_{kj}a_j = \beta_k}
+\end{equation}
+
+\begin{equation}
+\mathbf{\alpha} = \mathbf{A}^T \cdot \mathbf{A}
+\end{equation}
+
+\begin{equation}
+\mathbf{\beta} = \mathbf{A}^T \cdot \mathbf{b}
+\end{equation}
+
+then equation has the form
+
+\begin{equation}
+\mathbf{A}^T \cdot \mathbf{A} \cdot \mathbf{c} = 
+\mathbf{A}^T \cdot \mathbf{b}
+\end{equation}
+

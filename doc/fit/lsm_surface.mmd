@@ -1,0 +1,58 @@
+# Least Squares Method (LSM)
+## Direct Method - Surface
+
+Have $N$ points: $(x_1,y_1,z_1),\ldots,(x_N,y_N,z_N)$
+
+Find $f(x,y;a_1,\ldots,a_6) = a_1 x^2 + a_2 x y + a_3 y^2 + a_4 x + a_5 y + a_6$ which is
+
+Consider merit function
+
+$$
+\chi^2(a_1,\ldots,a_6) = \sum_{k=1}^N \left( f(x_k)-z_k \right)^2
+$$
+
+Take partial derivatives:
+
+\begin{eqnarray}
+\frac{\partial(\chi^2)}{\partial a_1} &=& 2 \sum_{k=1}^N (f(x_k,y_k) - z_k )x_k^2 \\
+\frac{\partial(\chi^2)}{\partial a_2} &=& 2 \sum_{k=1}^N (f(x_k,y_k) - z_k )x_k y_k \\
+\frac{\partial(\chi^2)}{\partial a_3} &=& 2 \sum_{k=1}^N (f(x_k,y_k) - z_k )y_k^2 \\
+\frac{\partial(\chi^2)}{\partial a_4} &=& 2 \sum_{k=1}^N (f(x_k,y_k) - z_k )x_k \\
+\frac{\partial(\chi^2)}{\partial a_5} &=& 2 \sum_{k=1}^N (f(x_k,y_k) - z_k )y_k \\
+\frac{\partial(\chi^2)}{\partial a_6} &=& 2 \sum_{k=1}^N (f(x_k,y_k) - z_k )
+\end{eqnarray}
+
+The merit function reaches minimum when derivatives vanish. This leads to the following set of equations:
+
+\begin{eqnarray}
+a S_{xx} + b S_{xy} + c S_x &=& S_{xxz} \\
+a S_{xy} + b S_{yy} + c S_y &=& S_{xyz} \\
+a S_{xy} + b S_{yy} + c S_y &=& S_{yyz} \\
+a S_{xy} + b S_{yy} + c S_y &=& S_{xz} \\
+a S_{xy} + b S_{yy} + c S_y &=& S_{yz} \\
+a S_x + b S_y + c N &=& S_z
+\end{eqnarray}
+
+or in matrix form
+
+$$
+\begin{pmatrix}
+  S_{xx} & S_{xy} & S_x \\
+  S_{xy} & S_{yy} & S_y \\
+  S_{xx} & S_{xy} & S_x \\
+  S_{xy} & S_{yy} & S_y \\
+  S_{xx} & S_{xy} & S_x \\
+  S_x & S_y & N
+\end{pmatrix}
+\begin{pmatrix}
+a_1 \\ a_2 \\ a_3 \\ a_4 \\ a_5 \\ a_6
+\end{pmatrix}
+=
+\begin{pmatrix}
+S_{xxz} \\ S_{xyz} \\ S_{yyz} \\ S_{xz} \\ S_{yz} \\ S_z
+\end{pmatrix}
+$$
+
+Where $S_x = \sum_{k=1}^N x_k$, $S_y = \sum_{k=1}^N y_k$, $S_y = \sum_{k=1}^N z_k$, $S_{xx} = \sum_{k=1}^N x_k^2$, $S_{xy} = \sum_{k=1}^N x_k y_k$
+
+

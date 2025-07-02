@@ -1,0 +1,37 @@
+# Least Median of Squares (LMedS)
+
+Model:
+
+\begin{equation}
+f(x;a,b) = a x + b
+\end{equation}
+
+Define merit function as
+
+\begin{equation}
+\chi^2 = \sum_{k=1}^N \left| a x_k + b - y_k \right|
+\end{equation}
+
+Median is the sum of abs deviation
+
+For fixed $a$ the value of $b$ can be calculated as
+
+\begin{equation}
+b = median \{ y_k - a x_k \}
+\end{equation}
+
+Solve the equation
+
+\begin{equation}
+\sum_{k=1}^N { x_k sign(a x_k + b - y_k) } = 0
+\end{equation}
+
+Define a function of one variable
+
+\begin{equation}
+\rho(a) = \sum_{k=1}^N { x_k sign(a x_k + median \{ y_k - a x_k \} - y_k) }
+\end{equation}
+
+This can be solved using bracketing and bisection. The first approximation of $a$ and $b$ can be obtained by regular least squares.
+
+

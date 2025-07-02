@@ -1,0 +1,151 @@
+# Camera Fundamental Matrix
+
+
+Projection of world points $p^3$ to $m^2$ image points. 
+
+\begin{eqnarray*}
+x_m = - f \frac{x_p}{z_p} \\
+y_m = - f \frac{y_p}{z_p}
+\end{eqnarray*}
+
+
+Let $P$ be 4x3 projection matrix which maps world point $\mathbf{M}$ into camera coordinate 
+$\mathbf{m}=\mathbf{P}\mathbf{X}$
+
+Principal plane is plane for which $mathbf{P}\mathbf{X}=(x,y,0)$
+
+
+Perspective matrix
+
+$$
+P = \left(
+\begin{array}{cccc}
+-f &  0 & 0 & 0 \\
+ 0 & -f & 0 & 0 \\
+ 0 &  0 & 1 & 0
+\end{array}
+\right)
+$$
+
+
+where $f$ is focus 
+
+
+Internal Matrix
+
+$$
+K = \left[
+\begin{array}{ccc}
+f &        s & u_0 \\
+       0 & \alpha f & v_0 \\
+       0 &        0 & 1 
+\end{array}
+\right]
+$$
+
+or 
+
+\begin{equation}
+K = \left[
+\begin{array}{ccc}
+\alpha &        \gamma & u_0 \\
+       0 & \beta & v_0 \\
+       0 &        0 & 1 
+\end{array}
+\right]
+\end{equation}
+
+
+
+\begin{equation}
+A = KP = \left(
+\begin{array}{ccc}
+\alpha_u & -\alpha_u \cot{\theta} & u_0 \\
+0 & \alpha_v / \sin{\theta} & v_0 \\
+0 & 0 & 1 
+\end{array}
+\right)
+\end{equation}
+
+\begin{equation}
+D = \left(R t\right)
+\end{equation}
+
+
+where
+
+$\theta$ is the skew (usually $\pi/2$)
+
+$(u_0,v_0)$ is the principal point
+
+$\mathbf{R}$ is 3 x 3 rotation matrix
+
+$\mathbf{t}$ is 3 x 1 translation vector
+
+
+External Matrix
+
+
+
+Essential Matrix
+
+$$
+E = t R
+$$
+
+
+
+
+
+Fundamental Matrix
+
+let 
+$$
+ m_1 = A_1 {m_1}
+$$
+
+
+$$
+F = A_2^{-T} E A_1^{-1}
+$$
+
+
+\begin{equation}
+m_1^T F m_2 = 0
+\end{equation}
+
+
+## Finding Fundamental Matrix
+
+let $\mathbf{m}_1=(x_1,y_1,1)$ and $\mathbf{m}_2=(x_2,y_2,1)$ and $\mathbf{f}$ be 9 vector built from $F$ then
+
+Let $\mathbf{A}$ be mx9 matrix which corresponds to a set of matched m points.
+
+$$
+A = 
+\left(
+\begin{array}{ccccccccc}
+x_1^1 x_2^1 & x_1^1 y_2^1 & x_1^1 & y_1^1 x_2^1 & y_1^1 y_2^1 & y_1^1 & x_2^1 & y_2^1 & 1 \\
+x_1^2 x_2^2 & x_1^2 y_2^2 & x_1^2 & y_1^2 x_2^2 & y_1^2 y_2^2 & y_1^2 & x_2^2 & y_2^2 & 1 \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+x_1^m x_2^m & x_1^m y_2^m & x_1^m & y_1^m x_2^m & y_1^m y_2^m & y_1^m & x_2^m & y_2^m & 1 
+\end{array}
+\right)
+$$
+
+
+In this case the set of linear equations will have the form
+
+$$\mathbf{A}\mathbf{f} = 0$$
+
+The solution is the singular vector corresponding to smallest singular value of SVD decomposition of A
+
+## Enforcing singularity constraint.
+
+Since matrix F suppose to be singular. To enforce this F is replaced by F' which minimizes Frobenius norm 
+$\Vert F - F' \Vert$ where $det F' = 0$. This can be done by SVD decomposition of $F = U \Sigma V^T$ 
+where $\Sigma$ is diagonal matrix $\Sigma=diag(\sigma_1,\sigma_2,\sigma_3)$. 
+Let $\Sigma' = diag(\sigma_1,\sigma_2,0)$, then $F' = U \Sigma' V^T$ minimizes Frobenius norm
+
+Normalization
+

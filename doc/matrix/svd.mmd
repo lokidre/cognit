@@ -1,0 +1,12 @@
+# SVD for Solution of Linear Equations
+
+Let $\mathbf{A}$ be $M \times N$ and $\mathbf{b}$ be $N$ vector. The solution of  $\mathbf{A}\cdot\mathbf{x}=\mathbf{b}$ is $\mathbf{x}$ is $M$ vector.
+
+The SVD decomposition of $\mathbf{A}$ has form $\mathbf{A}=\mathbf{U}\mathbf{\Sigma}\mathbf{V}^T$ where $\mathbf{U}$ and $\mathbf{V}$ are orthogonal and $\Sigma=\left[diag(\sigma_j)\right]$ is diagonal containing singular values.
+
+The solution can be found by applying pseudo-inverse. Note, $\Sigma^{-1}=\left[diag(\frac{1}{\sigma_j})\right]$. Numerically for zero or very small singular values the corresponding values of it's inverse should be set to zero. Then the solution in least squares means will have the following form.
+
+$$
+\mathbf{x} = \mathbf{V} \cdot \Sigma^{-1} \cdot \mathbf{U}^T \cdot \mathbf{b}
+$$
+

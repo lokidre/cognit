@@ -1,0 +1,30 @@
+# Splines
+
+General form:
+
+$$
+S:[a,b] \longrightarrow R
+$$
+
+
+where
+
+$$ a < t_0 < t_1 < \ldots < t_{n-1} < b $$
+
+$t_i$ are called \definition{knots}
+vector $t=(t_0,\ldots,t_{n-1})$ is called \definition{knot vector}
+
+The spline is called \definition{uniform} if the distances between neighboring knots are equal
+and - \definition{non-uniform} otherwise.
+
+
+If each polynomial on each interval has degree not more than $n$, then spline is said to be
+degree of $n$ or of order $n+1$.
+
+
+A parametric curve
+
+$$ G(t) = (X(t),Y(t)), t \in [a,b] $$
+
+if called \term{spline curve}
+

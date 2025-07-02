@@ -1,0 +1,138 @@
+# Camera Calibration
+
+\section*{2D Object}
+Reference: Zhang
+
+
+Let $\mathbf{X}=(X,Y,Z,1)^T$ be homogeneous coordinates of point in 3D space
+and $\mathbf{m}=(x,y,1)^T$ be its homogenous image on camera.
+The point in space and its image coordinates related through the following homography:
+
+\begin{displaymath}
+s\mathbf{m}=\mathbf{P}\mathbf{X}
+\end{displaymath}
+
+where $s$ is arbitrary scalar meaning that homography can be defined only up to a scale.
+
+Suppose $\mathbf{X}_i$ are points of 2D calibration object with known coordinates.
+Without loss of generality we can assume that $Z_i=0$, then let
+
+
+Define camera model.
+
+$$
+\mathbf{m} = \mathbf{P} \mathbf{M}
+$$
+
+where $\mathbf{P}$ is camera matrix defined as
+
+$$\mathbf{P}=\mathbf{K} \mathbf{C} $$
+
+where $\mathbf{C}$ is camera extrinsic matrix which encode rotation and translation of camera 
+
+$$\mathbf{C} = [ \mathbf{R} | \mathbf{t} ] $$
+
+Here $\mathbf{K}$ is camera instrinsic (calibration) matrix defined as:
+
+$$
+\mathbf{K} = 
+     \left[
+          \begin{array}{ccc}
+               \alpha & \gamma & u_0 \\
+                    0 & \beta  & v_0 \\
+                    0 &      0 &   1
+          \end{array}
+     \right]
+$$
+
+Denote rotation matrix as $\mathbf{R} = (\mathbf{r}_1,\mathbf{r}_2,\mathbf{r}_3)^T$ where $\mathbf{r}_i$ is i-th column of matrix $\mathbf{R}$. Similarly $\mathbf{P}=(\mathbf{p}_1,\mathbf{p}_2,\mathbf{p}_3)^T$.
+
+Then we get
+
+$$
+s \left[ \begin{array}{c} x \\ y \\ 1 \end{array} \right] 
+= \mathbf{K} [ \mathbf{r}_1 \mathbf{r}_2 \mathbf{r}_3 \mathbf{t}] \left[ \begin{array}{c} X \\ Y \\ 0 \\ 1 \end{array} \right] 
+= \mathbf{K} [ \mathbf{r}_1 \mathbf{r}_2 \mathbf{t}] \left[ \begin{array}{c} X \\ Y \\ 1 \end{array} \right] 
+$$
+
+
+$$ \mathbf{P} = \lambda \mathbf{K} [ \mathbf{r}_1 \mathbf{r}_2 \mathbf{t} ] $$
+
+where $\lambda$ is arbitrary scalar
+
+Using orthonormality of $r_1$ and $r_2$ we have
+
+\begin{eqnarray}
+\label{fundamental_constraint1}
+\mathbf{p}_1^T \mathbf{K}^{-T} \mathbf{K}^{-1} \mathbf{p}_2 &=& 0 \\
+\label{fundamental_constraint2}
+\mathbf{p}_1^T \mathbf{K}^{-T} \mathbf{K}^{-1} \mathbf{p}_1 &=& 
+\mathbf{p}_2^T \mathbf{K}^{-T} \mathbf{K}^{-1} \mathbf{p}_2
+\end{eqnarray}
+
+Note that $\mathbf{K}^{-T} \mathbf{K}^{-1}$ is image of absolute conic
+
+## Closed form solution
+
+Let matrix $\mathbf{B}$ be defined as 
+
+$$
+\mathbf{B} = \mathbf{K}^{-T} \mathbf{K}^{-1}
+= 
+\left[
+\begin{array}{ccc}
+\beta^2                     & -\beta\gamma                              & v_0\beta\gamma - u_0\beta^2 \\
+-\beta\gamma                & \alpha^2 + \gamma^2                       & u_0\beta\gamma - v_0(\alpha^2 + \gamma^2) \\
+v_0\beta\gamma - u_0\beta^2 & u_0\beta\gamma - v_0(\alpha^2 + \gamma^2) & 
+(v_0\gamma-u_0\beta)^2 + \alpha^2 v_0^2 + \alpha^2 \beta^2
+\end{array}
+\right] / (\alpha^2 \beta^2)
+$$
+
+Matrix $\mathbf{B}$ is symmetric therefore can be defined as vector $\mathbf{b}=(b_{11},b_{12},b_{22},b_{13},b_{23},b_{33})^T$. 
+
+Camera intrinsic parameters relate to matrix B as follows:
+
+$$
+\begin{array}{ccc}
+v_0 &=& \frac{b_{12}b_{13} - b_{11} b_{23}}{b_{11}b_{22}-b_{12}^2}
+\end{array}
+$$
+
+
+Let the i-th column of $\mathbf{P}$ be $\mathbf{p}_i=(p_i1,p_i2,p_i3)^T$. Then $$h_i^T B h_j = v_{ij}^Tb$$
+where
+$$
+v_{ij} = \left[ 
+     \begin{array}{c}
+          p_{i1}p_{j1} \\
+          p_{i1}p_{j2} + p_{i2}p_{j1}\\
+          p_i2 pj2 \\
+          pi3pj1 + pi1pj3 \\
+          pi3pj2 + pi2pj3 \\
+          pi3pj3
+     \end{array}
+\right]
+$$
+
+Write down constraints ($\ref{fundamental_constraint1}$) and ($\ref{fundamental_constraint1}$) can be expressed
+as two homogeneous equations:
+\begin{equation}
+\left[
+\begin{array}{c}
+\mathbf{v}_{12}^T \\
+(\mathbf{v}_{11}-\mathbf{v}_{22})^T
+\end{array}
+\right] \mathbf{b} = \mathbf{0}
+\end{equation}
+
+For N images of target plane we can build $3Nx6$ matrix $\mathbf{V}$ by adding equations to the bottom. We get 
+$$
+\mathbf{V}\mathbf{b} = \mathbf{0}
+$$
+
+The unique solution of b is defined up to scale. The solution is the vector associated with the smalles eigen value of matrix $V^TV$ or right side vector associated with smallest singular value of matrix $V$.
+
+Camera intrinsic matrix $\mathbf{K}$ can be then calculated from $V$
+
+

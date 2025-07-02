@@ -1,0 +1,26 @@
+static char *_ccs_filter = 
+
+"<!DOCTYPE UI><UI version=\"3.2\" stdsetdef=\"1\">\n"
+"<class>MainWindow</class>\n"
+"<widget class=\"QMainWindow\">\n"
+"    <property name=\"name\">\n"
+"        <cstring>MainWindow</cstring>\n"
+"    </property>\n"
+"    <property name=\"geometry\">\n"
+"        <rect>\n"
+"            <x>0</x>\n"
+"            <y>0</y>\n"
+"            <width>584</width>\n"
+"            <height>455</height>\n"
+"        </rect>\n"
+"    </property>\n"
+"    <property name=\"caption\">\n"
+"        <string>Filter</string>\n"
+"    </property>\n"
+"</widget>\n"
+"<toolbars>\n"
+"</toolbars>\n"
+"<layoutdefaults spacing=\"6\" margin=\"11\"/>\n"
+"</UI>\n"
+
+;

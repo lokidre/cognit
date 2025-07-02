@@ -1,0 +1,27 @@
+# Rodrigues Rotation Formula
+
+Rodrigues formula provides efficient way to compute rotation matrix $\mathbf{R}$ around any unit vector $\mathbf{v}$ by an angle $\theta$. Thus
+
+\begin{equation}
+R = e^V \theta = I + V \sin\theta + V^2 (1 - \cos\theta)
+\end{equation}
+
+where 
+$I$ is identity matrix\\
+$V$ is skew symmetric matrix given by
+
+\begin{equation}
+\mathbf{V} = 
+\begin{pmatrix}
+  0 & -z_v & y_v \\
+  z_v &   0  & -x_v \\
+  -y_v & x_v & 0 \\
+\end{pmatrix}
+\end{equation}
+
+Rotation of vector $\mathbf{v}$ around vector $\mathbf{u}$
+
+\begin{equation}
+v_{rot} = v \cos\theta + u\times v \sin\theta + <u,v> u ( 1- \cos \theta)
+\end{equation}
+

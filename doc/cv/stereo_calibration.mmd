@@ -1,0 +1,31 @@
+# Stereo Camera Calibration
+
+Target
+
+Suppose our target is described as set of $N$ point pairs $M^i=(\mathbf{X}_1^i,\mathbf{X}_2^i)$
+Let $d^i=|\mathbf{X}_1^i-\mathbf{X}_2^i|$ be the known distance between the two points in each pair.
+
+
+
+Let $K_1$ and $K_2$ be known calibration matrices of two cameras.
+Suppose $P_1$ and $P_2$ be camera matrices. 
+Suppose first camera is at the origin of coordinate system, then
+$P_1 = K_1 [\mathbf{I}|\mathbf{0}]$ and $P_2= K_2 [\mathbf{R}|\mathbf{t}]$.
+
+where $\mathbf{R}$ and $\mathbf{t}$ are rotation and translation of second camera relative to the first.
+
+each point $X$ is projected into points $m1$ and $m2$ following
+
+$$m_1=P_1\mathbf{X}$$
+
+$$m_2=P_2\mathbf{X}$$
+
+
+The problem is to find $\mathbf{R}$ and $\mathbf{t}$. 
+Both $\mathbf{R}$ and $\mathbf{t}$ have 3 degrees of freedom.
+
+consider the system of equations for each pair omitting $i$ index
+
+$$d=|\mathbf{X}_1-\mathbf{X}_2|$$
+
+

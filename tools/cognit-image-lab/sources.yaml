@@ -1,0 +1,12 @@
+sources:
+
+  - dir: src
+    prefix: ${CMAKE_CURRENT_SOURCE_DIR}/src
+    include_directories: ["${CMAKE_CURRENT_SOURCE_DIR}/src"]
+    source_group: ImageLab
+    mask: ["*.cpp", "*.h", "*.hpp"]
+
+  - dir: res
+    prefix: ${CMAKE_CURRENT_SOURCE_DIR}/res
+    source_group: Resources
+    files: [image_toolkit.qrc]
